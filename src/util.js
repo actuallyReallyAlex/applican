@@ -74,12 +74,12 @@ const read = path =>
 const createTable = jobs =>
   new Promise((resolve, reject) => {
     try {
-      const table = new Table({ head: ['id', 'Company', 'Title', 'Status'] })
+      const table = new Table({ head: ['id', 'Company', 'Title', 'Type', 'Status'] })
 
       jobs.forEach(job => {
-        const status = statusColors[job.status](job.status)
+        const status = statusColors[job.status] ? statusColors[job.status](job.status) : chalk.yellowBright(job.status)
 
-        table.push([`${job.id}`, `${job.company}`, `${job.title}`, status])
+        table.push([`${job.id}`, `${job.company}`, `${job.title}`, `${job.type}`, status])
       })
 
       resolve(table)
