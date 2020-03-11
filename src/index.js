@@ -1,10 +1,12 @@
 import 'core-js/stable'
 import 'regenerator-runtime/runtime'
 
-import { displayTitle } from './util'
+import { displayJobs, displayTitle } from './util'
 
 const main = async () => {
   await displayTitle()
+
+  await displayJobs()
 }
 
 main()

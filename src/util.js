@@ -2,6 +2,10 @@ import boxen from 'boxen'
 import chalk from 'chalk'
 import figlet from 'figlet'
 
+import { readFile } from 'fs'
+import { join } from 'path'
+import { async } from 'regenerator-runtime'
+
 /**
  * Default style applied to Boxen.
  */
@@ -29,6 +33,32 @@ const figletPromise = (txt, options = {}) =>
     })
   )
 
+const read = path =>
+  new Promise((resolve, reject) => {
+    try {
+      readFile(path, (err, data) => {
+        if (err) {
+          return reject(err)
+        }
+
+        resolve(JSON.parse(data.toString()))
+      })
+    } catch (e) {
+      reject(e)
+    }
+  })
+
+const displayJobs = () =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const jobs = await read(join(__dirname, '../jobs.json'))
+      console.log(JSON.stringify(jobs, null, 2))
+      resolve()
+    } catch (e) {
+      reject(e)
+    }
+  })
+
 const displayTitle = () =>
   new Promise(async (resolve, reject) => {
     try {
@@ -42,5 +72,6 @@ const displayTitle = () =>
   })
 
 module.exports = {
+  displayJobs,
   displayTitle
 }
