@@ -1,6 +1,7 @@
 import boxen from 'boxen'
 import chalk from 'chalk'
 import figlet from 'figlet'
+import Table from 'cli-table'
 
 import { readFile } from 'fs'
 import { join } from 'path'
@@ -48,11 +49,28 @@ const read = path =>
     }
   })
 
+const createTable = jobs =>
+  new Promise((resolve, reject) => {
+    try {
+      const table = new Table({ head: ['id', 'Company', 'Title', 'Status'] })
+
+      jobs.forEach(job => {
+        table.push([`${job.id}`, `${job.company}`, `${job.title}`, `${job.status}`])
+      })
+
+      resolve(table)
+    } catch (e) {
+      reject(e)
+    }
+  })
+
 const displayJobs = () =>
   new Promise(async (resolve, reject) => {
     try {
-      const jobs = await read(join(__dirname, '../jobs.json'))
-      console.log(JSON.stringify(jobs, null, 2))
+      const { jobs } = await read(join(__dirname, '../jobs.json'))
+      const table = await createTable(jobs)
+
+      console.log(table.toString())
       resolve()
     } catch (e) {
       reject(e)
