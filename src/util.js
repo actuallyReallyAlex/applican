@@ -1,5 +1,6 @@
 import boxen from 'boxen'
 import chalk from 'chalk'
+import clear from 'clear'
 import figlet from 'figlet'
 import Table from 'cli-table'
 
@@ -105,6 +106,7 @@ const displayTitle = () =>
     try {
       const text = await figletPromise('Job Applications', { font: 'slant' })
 
+      clear()
       console.log(boxen(chalk.blueBright(text), defaultBoxenStyle))
       resolve()
     } catch (e) {
