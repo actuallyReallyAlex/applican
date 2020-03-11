@@ -5,7 +5,22 @@ import Table from 'cli-table'
 
 import { readFile } from 'fs'
 import { join } from 'path'
-import { async } from 'regenerator-runtime'
+
+/**
+ * Blank style applied to Boxen.
+ */
+const blankBoxenStyle = {
+  borderStyle: {
+    topLeft: ' ',
+    topRight: ' ',
+    bottomLeft: ' ',
+    bottomRight: ' ',
+    horizontal: ' ',
+    vertical: ' '
+  },
+  float: 'center',
+  padding: { top: 0, bottom: 0, right: 1, left: 1 }
+}
 
 /**
  * Default style applied to Boxen.
@@ -70,7 +85,7 @@ const displayJobs = () =>
       const { jobs } = await read(join(__dirname, '../jobs.json'))
       const table = await createTable(jobs)
 
-      console.log(table.toString())
+      console.log(boxen(table.toString(), blankBoxenStyle))
       resolve()
     } catch (e) {
       reject(e)
