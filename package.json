@@ -1,0 +1,19 @@
+{
+  "name": "job-app-viewer",
+  "version": "0.0.0",
+  "description": "Help organzie job applications.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexlee-dev/job-app-viewer.git"
+  },
+  "author": "Alex Lee <www.alexlee.dev>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alexlee-dev/job-app-viewer/issues"
+  },
+  "homepage": "https://github.com/alexlee-dev/job-app-viewer#readme"
+}
