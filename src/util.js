@@ -3,7 +3,7 @@ import chalk from 'chalk'
 import figlet from 'figlet'
 import Table from 'cli-table'
 
-import { readFile } from 'fs'
+import { readFile, stat } from 'fs'
 import { join } from 'path'
 
 /**
@@ -30,6 +30,12 @@ const defaultBoxenStyle = {
   borderStyle: 'round',
   float: 'center',
   padding: { top: 0, bottom: 0, right: 1, left: 1 }
+}
+
+const statusColors = {
+  Accepted: chalk.greenBright,
+  Applied: chalk.yellowBright,
+  Rejected: chalk.redBright
 }
 
 /**
@@ -70,7 +76,9 @@ const createTable = jobs =>
       const table = new Table({ head: ['id', 'Company', 'Title', 'Status'] })
 
       jobs.forEach(job => {
-        table.push([`${job.id}`, `${job.company}`, `${job.title}`, `${job.status}`])
+        const status = statusColors[job.status](job.status)
+
+        table.push([`${job.id}`, `${job.company}`, `${job.title}`, status])
       })
 
       resolve(table)
