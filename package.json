@@ -4,9 +4,9 @@
   "description": "Help organzie job applications.",
   "main": "src/index.js",
   "scripts": {
-    "build": "babel src -d lib",
+    "build": "tsc",
     "clean": "rimraf lib",
-    "format": "prettier --write \"**/*.{js,json}\"",
+    "format": "prettier --write \"**/*.{js,json,ts}\"",
     "start": "node lib/index.js"
   },
   "repository": {
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/alexlee-dev/job-app-viewer#readme",
   "dependencies": {
+    "@types/node": "^13.9.1",
     "boxen": "^4.2.0",
     "chalk": "^3.0.0",
     "clear": "^0.1.0",
@@ -29,9 +30,6 @@
     "regenerator-runtime": "^0.13.3"
   },
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.8.7",
-    "@babel/preset-env": "^7.8.7",
     "prettier": "^1.19.1",
     "rimraf": "^3.0.2"
   }
