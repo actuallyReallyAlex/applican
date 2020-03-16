@@ -1,13 +1,13 @@
-import * as boxen from 'boxen'
-import * as chalk from 'chalk'
-import * as clear from 'clear'
-import * as figlet from 'figlet'
-import * as Table from 'cli-table'
+import boxen from "boxen";
+import chalk from "chalk";
+import clear from "clear";
+import figlet from "figlet";
+import Table from "cli-table";
 
-import { readFile } from 'fs'
-import { join } from 'path'
+import { readFile } from "fs";
+import { join } from "path";
 
-import { blankBoxenStyle, defaultBoxenStyle, statusColors } from './constants'
+import { blankBoxenStyle, defaultBoxenStyle, statusColors } from "./constants";
 
 /**
  * Uses Figlet to transform your text to ASCII.
@@ -15,16 +15,23 @@ import { blankBoxenStyle, defaultBoxenStyle, statusColors } from './constants'
  * @param {Object} options Options object.
  * @returns {Promise} Resolves with text.
  */
-const figletPromise: Function = (txt: String, options: Object = {}): Promise<any> =>
+const figletPromise: Function = (
+  txt: string,
+  options: object = {}
+): Promise<string> =>
   new Promise((resolve, reject) =>
-    figlet.text(txt, options, (error: undefined | Object, result: undefined | String) => {
-      if (error) {
-        return reject(error)
-      }
+    figlet.text(
+      txt,
+      options,
+      (error: undefined | object, result: undefined | string) => {
+        if (error) {
+          return reject(error);
+        }
 
-      return resolve(result)
-    })
-  )
+        return resolve(result);
+      }
+    )
+  );
 
 /**
  * Reads a file and returns as parsed JSON.
@@ -33,69 +40,81 @@ const figletPromise: Function = (txt: String, options: Object = {}): Promise<any
 const read: Function = (path: string) =>
   new Promise((resolve, reject) => {
     try {
-      readFile(path, (err: undefined | Object, data: undefined | Object) => {
+      readFile(path, (err: undefined | object, data: undefined | object) => {
         if (err) {
-          return reject(err)
+          return reject(err);
         }
 
-        resolve(JSON.parse(data.toString()))
-      })
+        resolve(JSON.parse(data.toString()));
+      });
     } catch (e) {
-      reject(e)
+      reject(e);
     }
-  })
+  });
 
 interface JobObject {
-  company: String
-  id: Number
-  status: 'Accepted' | 'Applied' | 'Rejected' | 'Initial Communications'
-  title: String
-  type: 'Contract' | 'Fulltime' | 'Parttime'
+  company: string;
+  id: number;
+  status: "Accepted" | "Applied" | "Rejected" | "Initial Communications";
+  title: string;
+  type: "Contract" | "Fulltime" | "Parttime";
 }
 
-const createTable: Function = (jobs: any[]) =>
+const createTable: Function = (jobs: object[]) =>
   new Promise((resolve, reject) => {
     try {
-      const table = new Table({ head: ['id', 'Company', 'Title', 'Type', 'Status'] })
+      const table = new Table({
+        head: ["id", "Company", "Title", "Type", "Status"]
+      });
 
       jobs.forEach((job: JobObject) => {
-        const status = statusColors[job.status] ? statusColors[job.status](job.status) : chalk.yellowBright(job.status)
+        const status = statusColors[job.status]
+          ? statusColors[job.status](job.status)
+          : chalk.yellowBright(job.status);
 
-        table.push([`${job.id}`, `${job.company}`, `${job.title}`, `${job.type}`, status])
-      })
+        table.push([
+          `${job.id}`,
+          `${job.company}`,
+          `${job.title}`,
+          `${job.type}`,
+          status
+        ]);
+      });
 
-      resolve(table)
+      resolve(table);
     } catch (e) {
-      reject(e)
+      reject(e);
     }
-  })
+  });
 
-interface jobsObject {
-  jobs: Array<object>
+interface JobsObject {
+  jobs: Array<object>;
 }
 
 export const displayJobs: Function = () =>
   new Promise(async (resolve, reject) => {
     try {
-      const { jobs }: jobsObject = await read(join(__dirname, '../jobs.json'))
-      const table: Object = await createTable(jobs)
+      const { jobs }: JobsObject = await read(join(__dirname, "../jobs.json"));
+      const table: object = await createTable(jobs);
 
-      console.log(boxen(table.toString(), blankBoxenStyle))
-      resolve()
+      console.log(boxen(table.toString(), blankBoxenStyle));
+      resolve();
     } catch (e) {
-      reject(e)
+      reject(e);
     }
-  })
+  });
 
 export const displayTitle: Function = () =>
   new Promise(async (resolve, reject) => {
     try {
-      const text: String = await figletPromise('Job Applications', { font: 'slant' })
+      const text: string = await figletPromise("Job Applications", {
+        font: "slant"
+      });
 
-      clear()
-      console.log(boxen(chalk.blueBright(text), defaultBoxenStyle))
-      resolve()
+      clear();
+      console.log(boxen(chalk.blueBright(text), defaultBoxenStyle));
+      resolve();
     } catch (e) {
-      reject(e)
+      reject(e);
     }
-  })
+  });

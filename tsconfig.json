@@ -3,7 +3,8 @@
     "outDir": "./lib",
     "allowJs": true,
     "target": "es5",
-    "moduleResolution": "Node"
+    "moduleResolution": "Node",
+    "esModuleInterop": true
   },
   "include": ["./src/**/*"]
 }

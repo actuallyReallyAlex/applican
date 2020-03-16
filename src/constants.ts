@@ -1,4 +1,4 @@
-import * as chalk from 'chalk'
+import chalk from 'chalk'
 import { Options as boxenOptions, BorderStyle } from 'boxen'
 
 /**
@@ -27,7 +27,7 @@ export const defaultBoxenStyle: boxenOptions = {
   padding: { top: 0, bottom: 0, right: 1, left: 1 }
 }
 
-export const statusColors: Object = {
+export const statusColors: object = {
   Accepted: chalk.greenBright,
   Applied: chalk.yellowBright,
   Rejected: chalk.redBright
