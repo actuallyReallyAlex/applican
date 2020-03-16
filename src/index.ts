@@ -3,7 +3,7 @@ import 'regenerator-runtime/runtime'
 
 import { displayJobs, displayTitle } from './util'
 
-const main = async () => {
+const main: Function = async () => {
   await displayTitle()
 
   await displayJobs()
