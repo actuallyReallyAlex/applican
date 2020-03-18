@@ -11,6 +11,7 @@ import { join } from "path";
 
 import { blankBoxenStyle, defaultBoxenStyle, statusColors } from "./constants";
 import edit from "./actions/edit";
+import add from "./actions/add";
 
 /**
  * Uses Figlet to transform your text to ASCII.
@@ -94,6 +95,7 @@ export interface JobObject {
   title: string;
   todo: string;
   type: "Contract" | "Fulltime" | "Parttime";
+  url: string;
 }
 
 export const createTable: Function = (jobs: object[]) =>
@@ -165,6 +167,7 @@ export const displayMainMenu: Function = (state: AppState): Promise<void> =>
           message: "Main Menu",
           name: "menuAction",
           choices: [
+            { value: "add", name: "Add" },
             { value: "edit", name: "Edit" },
             new inquirer.Separator(),
             { value: "exit", name: "Exit" }
@@ -185,6 +188,10 @@ export const interpretMenuAction: Function = async (
 ): Promise<void> => {
   try {
     const actions = {
+      add: async (state: AppState): Promise<void> => {
+        await add(state);
+        state.menuActionEmitter.emit("actionCompleted", state);
+      },
       edit: async (state: AppState): Promise<void> => {
         await edit(state);
         state.menuActionEmitter.emit("actionCompleted", state);
