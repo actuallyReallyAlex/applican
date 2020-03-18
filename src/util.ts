@@ -5,6 +5,7 @@ import Table from "cli-table";
 import figlet from "figlet";
 import inquirer from "inquirer";
 
+import EventEmitter from "events";
 import { readFile, writeFile } from "fs";
 import { join } from "path";
 
@@ -57,6 +58,7 @@ export const read: Function = (path: string) =>
 export interface AppState {
   jobs: JobsObject;
   menuAction: null | string;
+  menuActionEmitter: EventEmitter.EventEmitter;
 }
 
 export const readJobs: Function = (state: AppState): Promise<object> =>
@@ -154,7 +156,7 @@ export const displayTitle: Function = () =>
     }
   });
 
-export const displayMainMenu: Function = (): Promise<void> =>
+export const displayMainMenu: Function = (state: AppState): Promise<void> =>
   new Promise(async (resolve: Function, reject: Function) => {
     try {
       const { menuAction } = await inquirer.prompt([
@@ -165,6 +167,7 @@ export const displayMainMenu: Function = (): Promise<void> =>
           choices: [{ value: "edit", name: "Edit" }]
         }
       ]);
+      state.menuAction = menuAction;
       resolve(menuAction);
     } catch (e) {
       reject(e);
@@ -174,16 +177,17 @@ export const displayMainMenu: Function = (): Promise<void> =>
 export type MenuAction = "Edit";
 
 export const interpretMenuAction: Function = async (
-  menuAction: MenuAction
+  state: AppState
 ): Promise<void> => {
   try {
     const actions = {
-      edit: async (): Promise<void> => {
-        await edit();
+      edit: async (state: AppState): Promise<void> => {
+        await edit(state);
+        state.menuActionEmitter.emit("actionCompleted", state);
       }
     };
 
-    await actions[menuAction]();
+    await actions[state.menuAction](state);
   } catch (e) {
     throw new Error(e);
   }

@@ -2,18 +2,16 @@ import inquirer from "inquirer";
 
 import { join } from "path";
 
-import { JobObject, JobsObject, read, write } from "../util";
+import { JobObject, JobsObject, write, AppState } from "../util";
 
-const edit = (): Promise<void> =>
+const edit = (state: AppState): Promise<void> =>
   new Promise(async (resolve: Function, reject: Function) => {
     try {
       const { id } = await inquirer.prompt([
         { type: "number", name: "id", message: "Job ID?" }
       ]);
 
-      const { jobs }: JobsObject = await read(
-        join(__dirname, "../../jobs.json")
-      );
+      const jobs = state.jobs.jobs;
 
       const selectedJob = jobs.find((job: JobObject) => job.id === id);
 
@@ -64,6 +62,8 @@ const edit = (): Promise<void> =>
         join(__dirname, "../../jobs.json"),
         JSON.stringify(newJobs, null, 2)
       );
+
+      state.jobs = newJobs;
 
       resolve();
     } catch (e) {
