@@ -1,12 +1,13 @@
 import "core-js/stable";
 import "regenerator-runtime/runtime";
 
+import { titleScreen } from "pickitt";
+
 import EventEmitter from "events";
 
 import {
   AppState,
   displayJobs,
-  displayTitle,
   displayMainMenu,
   interpretMenuAction,
   readJobs
@@ -16,7 +17,7 @@ const main: Function = async () => {
   const menuActionEmitter = new EventEmitter.EventEmitter();
   menuActionEmitter.on("actionCompleted", async state => {
     console.log("here");
-    await displayTitle();
+    await titleScreen("Job Applications");
     await displayJobs(state);
     await displayMainMenu(state);
     await interpretMenuAction(state);
@@ -30,7 +31,7 @@ const main: Function = async () => {
 
   await readJobs(state);
 
-  await displayTitle();
+  await titleScreen("Job Applications");
 
   await displayJobs(state);
 
