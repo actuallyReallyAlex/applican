@@ -58,6 +58,7 @@ interface JobObject {
   id: number;
   status: "Accepted" | "Applied" | "Rejected" | "Initial Communications";
   title: string;
+  todo: string;
   type: "Contract" | "Fulltime" | "Parttime";
 }
 
@@ -65,7 +66,7 @@ const createTable: Function = (jobs: object[]) =>
   new Promise((resolve, reject) => {
     try {
       const table = new Table({
-        head: ["id", "Company", "Title", "Type", "Contact", "Status"]
+        head: ["id", "Company", "Title", "Type", "Contact", "TODO", "Status"]
       });
 
       jobs.forEach((job: JobObject) => {
@@ -79,6 +80,7 @@ const createTable: Function = (jobs: object[]) =>
           `${job.title}`,
           `${job.type}`,
           `${job.contact}`,
+          `${job.todo}`,
           status
         ]);
       });
