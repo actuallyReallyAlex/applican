@@ -1,8 +1,9 @@
 import boxen from "boxen";
 import chalk from "chalk";
 import clear from "clear";
-import figlet from "figlet";
 import Table from "cli-table";
+import figlet from "figlet";
+import inquirer from "inquirer";
 
 import { readFile } from "fs";
 import { join } from "path";
@@ -118,6 +119,27 @@ export const displayTitle: Function = () =>
       clear();
       console.log(boxen(chalk.blueBright(text), defaultBoxenStyle));
       resolve();
+    } catch (e) {
+      reject(e);
+    }
+  });
+
+export const displayMainMenu: Function = (): Promise<void> =>
+  new Promise(async (resolve: Function, reject: Function) => {
+    try {
+      const { menuAction } = await inquirer.prompt([
+        {
+          type: "list",
+          message: "Main Menu",
+          name: "menuAction",
+          choices: [
+            { value: 1, name: "Option 1" },
+            { value: 2, name: "option 2" },
+            { value: 3, name: "Option 3" }
+          ]
+        }
+      ]);
+      resolve(menuAction);
     } catch (e) {
       reject(e);
     }
