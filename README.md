@@ -30,7 +30,7 @@
 
 ## 🧐 About <a name = "about"></a>
 
-Ya know how hard it is to keep your job app stuff in line? That's where **\*Job-App-Viewer** comes in.
+Ya know how hard it is to keep your job app stuff in line? That's where **Job-App-Viewer** comes in.
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
