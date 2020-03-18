@@ -54,6 +54,7 @@ const read: Function = (path: string) =>
 
 interface JobObject {
   company: string;
+  contact: string;
   id: number;
   status: "Accepted" | "Applied" | "Rejected" | "Initial Communications";
   title: string;
@@ -64,7 +65,7 @@ const createTable: Function = (jobs: object[]) =>
   new Promise((resolve, reject) => {
     try {
       const table = new Table({
-        head: ["id", "Company", "Title", "Type", "Status"]
+        head: ["id", "Company", "Title", "Type", "Contact", "Status"]
       });
 
       jobs.forEach((job: JobObject) => {
@@ -77,6 +78,7 @@ const createTable: Function = (jobs: object[]) =>
           `${job.company}`,
           `${job.title}`,
           `${job.type}`,
+          `${job.contact}`,
           status
         ]);
       });
