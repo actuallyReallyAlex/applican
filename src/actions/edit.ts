@@ -1,8 +1,9 @@
 import inquirer from "inquirer";
+import { writeIt } from "pickitt";
 
 import { join } from "path";
 
-import { JobObject, JobsObject, write, AppState } from "../util";
+import { JobObject, JobsObject, AppState } from "../util";
 
 const edit = (state: AppState): Promise<void> =>
   new Promise(async (resolve: Function, reject: Function) => {
@@ -58,7 +59,7 @@ const edit = (state: AppState): Promise<void> =>
         })
       };
 
-      await write(
+      await writeIt(
         join(__dirname, "../../jobs.json"),
         JSON.stringify(newJobs, null, 2)
       );

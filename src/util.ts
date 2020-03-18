@@ -1,60 +1,15 @@
 import boxen from "boxen";
 import chalk from "chalk";
-import clear from "clear";
 import Table from "cli-table";
-import figlet from "figlet";
 import inquirer from "inquirer";
+import { readIt } from "pickitt";
 
 import EventEmitter from "events";
-import { readFile, writeFile } from "fs";
 import { join } from "path";
 
-import { blankBoxenStyle, defaultBoxenStyle, statusColors } from "./constants";
+import { blankBoxenStyle, statusColors } from "./constants";
 import edit from "./actions/edit";
 import add from "./actions/add";
-
-/**
- * Uses Figlet to transform your text to ASCII.
- * @param {String} txt Text to be figlet-itized.
- * @param {Object} options Options object.
- * @returns {Promise} Resolves with text.
- */
-const figletPromise: Function = (
-  txt: string,
-  options: object = {}
-): Promise<string> =>
-  new Promise((resolve, reject) =>
-    figlet.text(
-      txt,
-      options,
-      (error: undefined | object, result: undefined | string) => {
-        if (error) {
-          return reject(error);
-        }
-
-        return resolve(result);
-      }
-    )
-  );
-
-/**
- * Reads a file and returns as parsed JSON.
- * @param {String} path - Path to file to be read.
- */
-export const read: Function = (path: string) =>
-  new Promise((resolve, reject) => {
-    try {
-      readFile(path, (err: undefined | object, data: undefined | object) => {
-        if (err) {
-          return reject(err);
-        }
-
-        resolve(JSON.parse(data.toString()));
-      });
-    } catch (e) {
-      reject(e);
-    }
-  });
 
 export interface AppState {
   jobs: JobsObject;
@@ -65,23 +20,11 @@ export interface AppState {
 export const readJobs: Function = (state: AppState): Promise<object> =>
   new Promise(async (resolve: Function, reject: Function) => {
     try {
-      const jobs: JobsObject = await read(join(__dirname, "../jobs.json"));
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // @ts-ignore
+      const jobs: JobsObject = await readIt(join(__dirname, "../jobs.json"));
       state.jobs = jobs;
       resolve(jobs);
-    } catch (e) {
-      reject(e);
-    }
-  });
-
-export const write: Function = (path: string, data: JSON): Promise<Buffer> =>
-  new Promise((resolve: Function, reject: Function) => {
-    try {
-      writeFile(path, data, (err: Error) => {
-        if (err) {
-          return reject(err);
-        }
-        resolve();
-      });
     } catch (e) {
       reject(e);
     }
@@ -137,21 +80,6 @@ export const displayJobs: Function = (state: AppState) =>
       const table: object = await createTable(state.jobs.jobs);
 
       console.log(boxen(table.toString(), blankBoxenStyle));
-      resolve();
-    } catch (e) {
-      reject(e);
-    }
-  });
-
-export const displayTitle: Function = () =>
-  new Promise(async (resolve: Function, reject: Function) => {
-    try {
-      const text: string = await figletPromise("Job Applications", {
-        font: "slant"
-      });
-
-      clear();
-      console.log(boxen(chalk.blueBright(text), defaultBoxenStyle));
       resolve();
     } catch (e) {
       reject(e);
