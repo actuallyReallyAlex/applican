@@ -5,10 +5,11 @@ import Table from "cli-table";
 import figlet from "figlet";
 import inquirer from "inquirer";
 
-import { readFile } from "fs";
+import { readFile, writeFile } from "fs";
 import { join } from "path";
 
 import { blankBoxenStyle, defaultBoxenStyle, statusColors } from "./constants";
+import edit from "./actions/edit";
 
 /**
  * Uses Figlet to transform your text to ASCII.
@@ -38,7 +39,7 @@ const figletPromise: Function = (
  * Reads a file and returns as parsed JSON.
  * @param {String} path - Path to file to be read.
  */
-const read: Function = (path: string) =>
+export const read: Function = (path: string) =>
   new Promise((resolve, reject) => {
     try {
       readFile(path, (err: undefined | object, data: undefined | object) => {
@@ -53,7 +54,21 @@ const read: Function = (path: string) =>
     }
   });
 
-interface JobObject {
+export const write: Function = (path: string, data: JSON): Promise<Buffer> =>
+  new Promise((resolve: Function, reject: Function) => {
+    try {
+      writeFile(path, data, (err: Error) => {
+        if (err) {
+          return reject(err);
+        }
+        resolve();
+      });
+    } catch (e) {
+      reject(e);
+    }
+  });
+
+export interface JobObject {
   company: string;
   contact: string;
   id: number;
@@ -63,7 +78,7 @@ interface JobObject {
   type: "Contract" | "Fulltime" | "Parttime";
 }
 
-const createTable: Function = (jobs: object[]) =>
+export const createTable: Function = (jobs: object[]) =>
   new Promise((resolve, reject) => {
     try {
       const table = new Table({
@@ -92,7 +107,7 @@ const createTable: Function = (jobs: object[]) =>
     }
   });
 
-interface JobsObject {
+export interface JobsObject {
   jobs: Array<object>;
 }
 
@@ -132,11 +147,7 @@ export const displayMainMenu: Function = (): Promise<void> =>
           type: "list",
           message: "Main Menu",
           name: "menuAction",
-          choices: [
-            { value: 1, name: "Option 1" },
-            { value: 2, name: "option 2" },
-            { value: 3, name: "Option 3" }
-          ]
+          choices: [{ value: "edit", name: "Edit" }]
         }
       ]);
       resolve(menuAction);
@@ -144,3 +155,21 @@ export const displayMainMenu: Function = (): Promise<void> =>
       reject(e);
     }
   });
+
+export type MenuAction = "Edit";
+
+export const interpretMenuAction: Function = async (
+  menuAction: MenuAction
+): Promise<void> => {
+  try {
+    const actions = {
+      edit: async (): Promise<void> => {
+        await edit();
+      }
+    };
+
+    await actions[menuAction]();
+  } catch (e) {
+    throw new Error(e);
+  }
+};
