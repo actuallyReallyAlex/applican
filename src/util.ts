@@ -54,6 +54,22 @@ export const read: Function = (path: string) =>
     }
   });
 
+export interface AppState {
+  jobs: JobsObject;
+  menuAction: null | string;
+}
+
+export const readJobs: Function = (state: AppState): Promise<object> =>
+  new Promise(async (resolve: Function, reject: Function) => {
+    try {
+      const jobs: JobsObject = await read(join(__dirname, "../jobs.json"));
+      state.jobs = jobs;
+      resolve(jobs);
+    } catch (e) {
+      reject(e);
+    }
+  });
+
 export const write: Function = (path: string, data: JSON): Promise<Buffer> =>
   new Promise((resolve: Function, reject: Function) => {
     try {
@@ -111,11 +127,10 @@ export interface JobsObject {
   jobs: Array<object>;
 }
 
-export const displayJobs: Function = () =>
-  new Promise(async (resolve, reject) => {
+export const displayJobs: Function = (state: AppState) =>
+  new Promise(async (resolve: Function, reject: Function) => {
     try {
-      const { jobs }: JobsObject = await read(join(__dirname, "../jobs.json"));
-      const table: object = await createTable(jobs);
+      const table: object = await createTable(state.jobs.jobs);
 
       console.log(boxen(table.toString(), blankBoxenStyle));
       resolve();
@@ -125,7 +140,7 @@ export const displayJobs: Function = () =>
   });
 
 export const displayTitle: Function = () =>
-  new Promise(async (resolve, reject) => {
+  new Promise(async (resolve: Function, reject: Function) => {
     try {
       const text: string = await figletPromise("Job Applications", {
         font: "slant"
