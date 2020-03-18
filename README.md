@@ -58,6 +58,7 @@ Ya know how hard it is to keep your job app stuff in line? That's where **Job-Ap
 - [CLI-Table](https://github.com/Automattic/cli-table) - Pretty unicode tables for the CLI with Node.JS
 - [Figlet](github.com/patorjk/figlet.js) - A FIG Driver written in JavaScript which aims to fully implement the FIGfont spec.
 - [Inquirer](https://github.com/SBoudrias/Inquirer.js) - A collection of common interactive command line user interfaces.
+- [Pickitt](https://pickitt.netlify.com/) - When you need a computer to just pick it, reach for Pickitt!
 - [TypeScript](https://www.typescriptlang.org/) - A typed superset of JavaScript that compiles to plain JavaScript.
 
 ## ✍️ Authors <a name = "authors"></a>
