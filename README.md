@@ -1,6 +1,6 @@
 <p align="center">
   <a href="" rel="noopener">
- <img width=256px height=256px src="https://raw.githubusercontent.com/alexlee-dev/job-app-viewer/master/job.svg" alt="Logo"></a>
+ <img width=256px height=256px src="https://github.com/alexlee-dev/job-app-viewer/blob/master/job.svg" alt="Logo"></a>
 </p>
 
 <h3 align="center">Job App Viewer</h3>
