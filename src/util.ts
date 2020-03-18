@@ -164,7 +164,11 @@ export const displayMainMenu: Function = (state: AppState): Promise<void> =>
           type: "list",
           message: "Main Menu",
           name: "menuAction",
-          choices: [{ value: "edit", name: "Edit" }]
+          choices: [
+            { value: "edit", name: "Edit" },
+            new inquirer.Separator(),
+            { value: "exit", name: "Exit" }
+          ]
         }
       ]);
       state.menuAction = menuAction;
@@ -184,7 +188,8 @@ export const interpretMenuAction: Function = async (
       edit: async (state: AppState): Promise<void> => {
         await edit(state);
         state.menuActionEmitter.emit("actionCompleted", state);
-      }
+      },
+      exit: (): void => process.exit()
     };
 
     await actions[state.menuAction](state);
