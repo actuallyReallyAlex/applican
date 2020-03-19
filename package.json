@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "A friendly pelican here to help you organize your next job hunt.",
   "main": "src/index.js",
+  "keywords": ["job", "hunt", "jobhunt", "helper", "cli", "application"],
   "files": [
     "lib",
     "LICENSE",
