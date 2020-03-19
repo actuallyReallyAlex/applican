@@ -27,7 +27,6 @@
 - [Getting Started](#getting_started)
 - [Usage](#usage)
 - [Built Using](#built_using)
-- [TODO](https://github.com/alexlee-dev/projedex/blob/master/TODO.md)
 - [Authors](#authors)
 
 ## 🧐 About <a name = "about"></a>
