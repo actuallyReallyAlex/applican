@@ -28,6 +28,7 @@
 - [Usage](#usage)
 - [Built Using](#built_using)
 - [Authors](#authors)
+- [Acknowledgments](#acknowledgement)
 
 ## 🧐 About <a name = "about"></a>
 
@@ -65,3 +66,7 @@ Ya know how hard it is to keep your job app stuff in line? That's where **applic
 ## ✍️ Authors <a name = "authors"></a>
 
 - [Alex Lee](https://github.com/alexlee-dev) - Application Developer
+
+## 🎉 Acknowledgements <a name = "acknowledgement"></a>
+
+- Pelican icon made by [Freepik](https://www.flaticon.com/authors/freepik) from [www.flaticon.com](https://www.flaticon.com/)
