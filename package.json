@@ -3,6 +3,12 @@
   "version": "0.0.0",
   "description": "Help organzie job applications.",
   "main": "src/index.js",
+  "files": [
+    "lib",
+    "LICENSE",
+    "package.json",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsc",
     "clean": "rimraf lib",
