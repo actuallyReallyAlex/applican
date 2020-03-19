@@ -6,3 +6,6 @@ jobs.json
 
 # Node Modules
 node_modules/
+
+# terminalizer example
+example.yml
