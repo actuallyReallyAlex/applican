@@ -10,6 +10,7 @@ import { join } from "path";
 import { blankBoxenStyle, statusColors } from "./constants";
 import edit from "./actions/edit";
 import add from "./actions/add";
+import deleteJob from "./actions/delete";
 
 export interface AppState {
   jobs: JobsObject;
@@ -96,6 +97,7 @@ export const displayMainMenu: Function = (state: AppState): Promise<void> =>
           name: "menuAction",
           choices: [
             { value: "add", name: "Add" },
+            { value: "delete", name: "Delete" },
             { value: "edit", name: "Edit" },
             new inquirer.Separator(),
             { value: "exit", name: "Exit" }
@@ -118,6 +120,10 @@ export const interpretMenuAction: Function = async (
     const actions = {
       add: async (state: AppState): Promise<void> => {
         await add(state);
+        state.menuActionEmitter.emit("actionCompleted", state);
+      },
+      delete: async (state: AppState): Promise<void> => {
+        await deleteJob(state);
         state.menuActionEmitter.emit("actionCompleted", state);
       },
       edit: async (state: AppState): Promise<void> => {
