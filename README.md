@@ -7,6 +7,7 @@
 
 <div align="center">
 
+[![NPM](https://img.shields.io/npm/v/applican.svg)](https://www.npmjs.com/package/applican)
 [![GitHub Issues](https://img.shields.io/github/issues/alexlee-dev/applican)](https://github.com/alexlee-dev/applican/issues)
 [![Dependencies](https://img.shields.io/david/alexlee-dev/applican)](https://github.com/alexlee-dev/applican)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
