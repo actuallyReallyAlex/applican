@@ -15,7 +15,7 @@
 
 ---
 
-<p align="center"> Help organize job applications
+<p align="center"> A friendly pelican here to help you organize your next job hunt.
     <br> 
 </p>
 

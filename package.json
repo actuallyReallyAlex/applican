@@ -1,7 +1,7 @@
 {
   "name": "applican",
   "version": "0.0.1",
-  "description": "Help organzie job applications.",
+  "description": "A friendly pelican here to help you organize your next job hunt.",
   "main": "src/index.js",
   "files": [
     "lib",
