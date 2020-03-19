@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="" rel="noopener">
+  <a href="https://github.com/alexlee-dev/applican" rel="noopener">
  <img width=256px height=256px src="https://res.cloudinary.com/alexlee-dev/image/upload/v1584649335/applican.svg" alt="Logo"></a>
 </p>
 
