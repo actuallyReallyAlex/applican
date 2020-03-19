@@ -1,5 +1,5 @@
 {
-  "name": "job-app-viewer",
+  "name": "applican",
   "version": "0.0.0",
   "description": "Help organzie job applications.",
   "main": "src/index.js",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alexlee-dev/job-app-viewer.git"
+    "url": "git+https://github.com/alexlee-dev/applican.git"
   },
   "author": "Alex Lee <www.alexlee.dev>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/alexlee-dev/job-app-viewer/issues"
+    "url": "https://github.com/alexlee-dev/applican/issues"
   },
-  "homepage": "https://github.com/alexlee-dev/job-app-viewer#readme",
+  "homepage": "https://github.com/alexlee-dev/applican#readme",
   "dependencies": {
     "boxen": "^4.2.0",
     "chalk": "^3.0.0",

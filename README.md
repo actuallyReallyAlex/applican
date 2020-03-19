@@ -1,14 +1,14 @@
 <p align="center">
   <a href="" rel="noopener">
- <img width=256px height=256px src="https://github.com/alexlee-dev/job-app-viewer/blob/master/job.svg" alt="Logo"></a>
+ <img width=256px height=256px src="https://github.com/alexlee-dev/applican/blob/master/job.svg" alt="Logo"></a>
 </p>
 
-<h3 align="center">Job App Viewer</h3>
+<h3 align="center">applican</h3>
 
 <div align="center">
 
-[![GitHub Issues](https://img.shields.io/github/issues/alexlee-dev/job-app-viewer)](https://github.com/alexlee-dev/job-app-viewer/issues)
-[![Dependencies](https://img.shields.io/david/alexlee-dev/job-app-viewer)](https://github.com/alexlee-dev/job-app-viewer)
+[![GitHub Issues](https://img.shields.io/github/issues/alexlee-dev/applican)](https://github.com/alexlee-dev/applican/issues)
+[![Dependencies](https://img.shields.io/david/alexlee-dev/applican)](https://github.com/alexlee-dev/applican)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 
 </div>
@@ -31,7 +31,7 @@
 
 ## 🧐 About <a name = "about"></a>
 
-Ya know how hard it is to keep your job app stuff in line? That's where **Job-App-Viewer** comes in.
+Ya know how hard it is to keep your job app stuff in line? That's where **applican** comes in.
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
