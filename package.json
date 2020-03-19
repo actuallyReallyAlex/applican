@@ -1,6 +1,6 @@
 {
   "name": "applican",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Help organzie job applications.",
   "main": "src/index.js",
   "files": [
