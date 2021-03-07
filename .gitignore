@@ -1,9 +1,6 @@
 # Build
 lib/
 
-# Jobs File
-jobs.json
-
 # Node Modules
 node_modules/
 

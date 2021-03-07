@@ -1,6 +1,6 @@
 {
   "name": "applican",
-  "version": "0.1.1",
+  "version": "0.1.3",
   "description": "A friendly pelican here to help you organize your next job hunt.",
   "main": "src/index.js",
   "keywords": [
@@ -14,6 +14,7 @@
   "files": [
     "lib",
     "LICENSE",
+    "jobs.json",
     "package.json",
     "README.md"
   ],
